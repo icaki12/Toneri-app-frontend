@@ -11,11 +11,6 @@
 
     <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	
-	<link rel="stylesheet" href="./bower_components/slick-carousel/slick/slick.css"/>
-	<link rel="stylesheet" href="./bower_components/slick-carousel/slick/slick-theme.css"/>
-
-	<script src="./bower_components/slick-carousel/slick/slick.min.js"></script>
-	
     <link rel="stylesheet" href="./styletoneri.css">
 
     <title>Lista štampača</title>
@@ -50,8 +45,8 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <form action="./da-li-ste-sigurni.html" method="post">
                 <div class="form-group">
-                    <label for="exampleInputStampac">Model štampača</label>
-                    <input class="form-control" type="text" id="exampleInputStampac" onkeyup="myFunction()" placeholder="Unesite model štampača" title="Type in a name">
+                    <label for="input_model_stampaca">Model štampača</label>
+                    <input type="text" class="form-control" id="input_model_stampaca" onkeyup="myFunction()" placeholder="Unesite model štampača" title="Type in a name">
                         <ul id="myUL">
                             <li><a href="#">ŠM1</a></li>
                             <li><a href="#">ŠM2</a></li>
@@ -99,23 +94,5 @@
         </div>
         
     </div>
-    <script>
-            function myFunction() {
-                var input, filter, ul, li, a, i;
-                input = document.getElementById("exampleInputStampac");
-                filter = input.value.toUpperCase();
-                ul = document.getElementById("myUL");
-                li = ul.getElementsByTagName("li");
-                for (i = 0; i < li.length; i++) {
-                    a = li[i].getElementsByTagName("a")[0];
-                    if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                        li[i].style.display = "";
-                    } else {
-                        li[i].style.display = "none";
-            
-                    }
-                }
-            }
-    </script>
 </body>
 </html>
