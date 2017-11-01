@@ -1,33 +1,35 @@
 <!DOCTYPE html>
 <html lang="sr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-	<script src="./bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="./bower_components/jquery/dist/jquery.min.js"></script>
 
     <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css">
 
     <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-	
-	<link rel="stylesheet" href="./bower_components/slick-carousel/slick/slick.css"/>
-	<link rel="stylesheet" href="./bower_components/slick-carousel/slick/slick-theme.css"/>
 
-	<script src="./bower_components/slick-carousel/slick/slick.min.js"></script>
-	
+    <link rel="stylesheet" href="./bower_components/slick-carousel/slick/slick.css" />
+    <link rel="stylesheet" href="./bower_components/slick-carousel/slick/slick-theme.css" />
+
+    <script src="./bower_components/slick-carousel/slick/slick.min.js"></script>
+
     <link rel="stylesheet" href="./styletoneri.css">
 
     <title>Lista tonera</title>
-	
+
 </head>
+
 <body>
     <div class="container">
-        <div class= "row">        
+        <div class="row">
             <nav class="col-lg-12 col-md-12 col-sm-12 col-xs-12 right backcolor">
                 <ul class="nav nav-tabs pull-left">
                     <li><a class="active" href="./stampaci-lista.html">Štampači</a>
-                    <li><a href="./stampaci-model-lista.html">Model štampača</a>                            
+                    <li><a href="./stampaci-model-lista.html">Model štampača</a>
                     <li><a href="./toneri-lista.html">Toneri</a>
                     <li><a href="./toneri-model-lista.html">Model tonera</a>
                     <li><a href="./magacin-lista.html">Magacin</a>
@@ -38,40 +40,41 @@
                 </ul>
             </nav>
         </div>
-        <div class= "row white">        
+        <div class="row white">
             <div class="col-lg-10 col-md-8 col-sm-6 col-xs-6 left-side">
                 <h4>Dodaj toner</h4>
-            </div>         
+            </div>
             <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6 right-side text-right">
                 <a class="btn btn-success btn-md" href="./toneri-lista.html"> Lista </a>
-            </div> 
+            </div>
         </div>
-        <div class= "row white">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <form>
+        <div class="row white">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <form action="./da-li-ste-sigurni.html" method="post">
                     <div class="form-group">
-                            <label for="exampleSelect2">Model tonera</label>
-                                <select class="form-control" id="exampleSelect2">
-                                <option>Toner model 1</option>
-                                <option>Toner model 2</option>
-                                </select>
+                        <label for="exampleSelect1">Model tonera</label>
+                        <select class="form-control" id="exampleSelect1">
+                            <option>Toner model 1</option>
+                            <option>Toner model 2</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="exampleSelect2">Magacin</label>
                         <select class="form-control" id="exampleSelect2">
-                        <option>Danijelova 32</option>
-                        <option>Kumodraška 212</option>
-                      </select>
+                            <option>Danijelova 32</option>
+                            <option>Kumodraška 212</option>
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputName2">Broj</label>
-                        <input class="form-control" id="exampleInputName2" placeholder="Unesite broj">
+                        <label for="input_stampac_broj">Broj</label>
+                        <input type="text" class="form-control" id="input_stampac_broj" name="input_stampac_ip_adresa" placeholder="Unesite broj" required>
                     </div>
-                    <a class="btn btn-primary btn-md" href="./da-li-ste-sigurni.html"> Sačuvaj </a>
-                </form>        
+                    <button type="submit" class="btn btn-primary btn-md"> Sačuvaj </button>
+                </form>
+            </div>
         </div>
-        </div>
-        
+
     </div>
 </body>
+
 </html>
