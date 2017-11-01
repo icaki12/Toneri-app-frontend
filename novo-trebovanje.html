@@ -12,11 +12,6 @@
 
 	<script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
-	<link rel="stylesheet" href="./bower_components/slick-carousel/slick/slick.css" />
-	<link rel="stylesheet" href="./bower_components/slick-carousel/slick/slick-theme.css" />
-
-	<script src="./bower_components/slick-carousel/slick/slick.min.js"></script>
-
 	<link rel="stylesheet" href="./styletoneri.css">
 
 	<title>Novo trebovanje</title>
@@ -27,7 +22,7 @@
 		var localCart = {};
 
 		window.onload = init;
-
+		
 		function init() {
 			document.querySelector('.confirmation-row').style.display = 'none';
 			recreateCartListing();
@@ -35,22 +30,22 @@
 		}
 
 		function getTonersFromApi() {
-			fetch('http://localhost/prvi_projekat/toneri-api/spisak-tonera.json')
-				.then(function (response) {
-					return response.text();
-				})
-				.then(function (text) {
-					localTonerList = JSON.parse(text);
+			fetch('./toneri-api/spisak-tonera.json')
+			.then(function(response){
+				return response.text();
+			})
+			.then(function(text){
+				localTonerList = JSON.parse(text);
 
-					if (!localTonerList || !localTonerList.length) {
-						console.log("Nije moguce ucitati sa API-ja tonere!");
-					}
+				if (!localTonerList || !localTonerList.length) {
+					console.log("Nije moguce ucitati sa API-ja tonere!");
+				}
 
-					for (var i in localTonerList) {
-						var toner = localTonerList[i];
-						tonerNames[toner.toner_id] = toner.toner_model_name + ' (' + toner.toner_model_type + ')';
-					}
-				});
+				for (var i in localTonerList) {
+					var toner = localTonerList[i];
+					tonerNames[toner.toner_id] = toner.toner_model_name + ' (' + toner.toner_model_type + ')';
+				}
+			});
 		}
 
 		function doTonerSearch() {
@@ -81,27 +76,44 @@
 
 			document.querySelector('#toner-table-body').appendChild(red);
 		}
-		document.querySelector('#cart-table-body').innerHTML = '';
 
-		document.querySelector('#make-confirmation-page-button').style.display = 'none';
+		function addToCart(senderButton) {
+			var red = senderButton.parentElement.parentElement;
 
-		if (Object.keys(localCart).length == 0) {
-			return;
-		}
+			var tonerId = red.dataset.tonerId;
+			var quantity = parseInt(red.querySelector('input.toner-item-input-quantity').value);
 
-		document.querySelector('#make-confirmation-page-button').style.display = 'inline-block';
-
-		for (tonerId in localCart) {
-			quantity = localCart[tonerId];
-
-			var red = document.querySelector('#cart-templates').content.querySelector('tr.cart-item').cloneNode(true);
-			red.querySelector('td.item-model-name').innerText = tonerNames[tonerId];
-			red.querySelector('td.item-quantity').innerText = quantity;
-			red.dataset.tonerId = tonerId;
-
-			document.querySelector('#cart-table-body').appendChild(red);
-		}
+			if (typeof localCart[tonerId] === 'undefined') {
+				localCart[tonerId] = 0;
 			}
+
+			localCart[tonerId] += quantity;
+
+			recreateCartListing();
+		}
+
+		function recreateCartListing() {
+			document.querySelector('#cart-table-body').innerHTML = '';
+
+			document.querySelector('#make-confirmation-page-button').style.display = 'none';
+
+			if (Object.keys(localCart).length == 0) {
+				return;
+			}
+
+			document.querySelector('#make-confirmation-page-button').style.display = 'inline-block';
+
+			for (tonerId in localCart) {
+				quantity = localCart[tonerId];
+
+				var red = document.querySelector('#cart-templates').content.querySelector('tr.cart-item').cloneNode(true);
+				red.querySelector('td.item-model-name').innerText = tonerNames[tonerId];
+				red.querySelector('td.item-quantity').innerText = quantity;
+				red.dataset.tonerId = tonerId;
+
+				document.querySelector('#cart-table-body').appendChild(red);
+			}
+		}
 
 		function removeFromCart(senderButton) {
 			var red = senderButton.parentElement.parentElement;
@@ -115,50 +127,33 @@
 			for (var i in listaDugmicaUKorpi) {
 				listaDugmicaUKorpi[i].disabled = true;
 			}
-			function addToCart(senderButton) {
-				var red = senderButton.parentElement.parentElement;
 
-				var tonerId = red.dataset.tonerId;
-				var quantity = parseInt(red.querySelector('input.toner-item-input-quantity').value);
+			document.querySelector('#make-confirmation-page-button').disabled = true;
+			
+			document.querySelector('#blok-pretrage').style.display = 'none';
+			document.querySelector('#blok-tonera').style.display = 'none';
+			
+			document.querySelector('.confirmation-row').style.display = 'table-row';
+		}
 
-				if (typeof localCart[tonerId] === 'undefined') {
-					localCart[tonerId] = 0;
-				}
-
-				localCart[tonerId] += quantity;
-
-				recreateCartListing();
+		function cancelOrder() {
+			var listaDugmicaUKorpi = document.querySelectorAll('.cart-item button');
+			for (var i in listaDugmicaUKorpi) {
+				listaDugmicaUKorpi[i].disabled = false;
 			}
 
-			function recreateCartListing() {
+			document.querySelector('#make-confirmation-page-button').disabled = false;
+			
+			document.querySelector('#blok-pretrage').style.display = 'block';
+			document.querySelector('#blok-tonera').style.display = 'block';
 
+			document.querySelector('.confirmation-row').style.display = 'none';
+		}
 
-				document.querySelector('#make-confirmation-page-button').disabled = true;
-
-				document.querySelector('#blok-pretrage').style.display = 'none';
-				document.querySelector('#blok-tonera').style.display = 'none';
-
-				document.querySelector('.confirmation-row').style.display = 'table-row';
-			}
-
-			function cancelOrder() {
-				var listaDugmicaUKorpi = document.querySelectorAll('.cart-item button');
-				for (var i in listaDugmicaUKorpi) {
-					listaDugmicaUKorpi[i].disabled = false;
-				}
-
-				document.querySelector('#make-confirmation-page-button').disabled = false;
-
-				document.querySelector('#blok-pretrage').style.display = 'block';
-				document.querySelector('#blok-tonera').style.display = 'block';
-
-				document.querySelector('.confirmation-row').style.display = 'none';
-			}
-
-			function sendOrder() {
-				document.querySelector('#hidden-cart-data').value = JSON.stringify(localCart);
-				document.querySelector('#send-cart-form').submit();
-			}
+		function sendOrder() {
+			document.querySelector('#hidden-cart-data').value = JSON.stringify(localCart);
+			document.querySelector('#send-cart-form').submit();
+		}
 	</script>
 </head>
 
