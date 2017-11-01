@@ -12,11 +12,6 @@
 
     <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
-    <link rel="stylesheet" href="./bower_components/slick-carousel/slick/slick.css" />
-    <link rel="stylesheet" href="./bower_components/slick-carousel/slick/slick-theme.css" />
-
-    <script src="./bower_components/slick-carousel/slick/slick.min.js"></script>
-
     <link rel="stylesheet" href="./styletoneri.css">
 
     <title>Lista štampača</title>
@@ -28,24 +23,15 @@
         <div class="row">
             <nav class="col-lg-12 col-md-12 col-sm-12 col-xs-12 right backcolor">
                 <ul class="nav nav-tabs pull-left">
-                    <li>
-                        <a class="active" href="./stampaci-lista.html">Štampači</a>
-                        <li>
-                            <a href="./stampaci-model-lista.html">Model štampača</a>
-                            <li>
-                                <a href="./toneri-lista.html">Toneri</a>
-                                <li>
-                                    <a href="./toneri-model-lista.html">Model tonera</a>
-                                    <li>
-                                        <a href="./magacin-lista.html">Magacin</a>
-                                        <li>
-                                            <a href="./korisnici-lista.html">Korisnici</a>
-                                            <li>
-                                                <a href="./vlasnici-lista.html">Vlasnici</a>
-                                                <li>
-                                                    <a href="./zaduzenja-lista.html">Zaduženja</a>
-                                                    <li>
-                                                        <a href="./trebovanja-lista.html">Trebovanja</a>
+                    <li><a class="active" href="./stampaci-lista.html">Štampači</a>
+                    <li><a href="./stampaci-model-lista.html">Model štampača</a>
+                    <li><a href="./toneri-lista.html">Toneri</a>
+                    <li><a href="./toneri-model-lista.html">Model tonera</a>
+                    <li><a href="./magacin-lista.html">Magacin</a>
+                    <li><a href="./korisnici-lista.html">Korisnici</a>
+                    <li><a href="./vlasnici-lista.html">Vlasnici</a>
+                    <li><a href="./zaduzenja-lista.html">Zaduženja</a>
+                    <li><a href="./trebovanja-lista.html">Trebovanja</a>
                 </ul>
             </nav>
         </div>
@@ -61,8 +47,8 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <form action="./da-li-ste-sigurni.html" method="post">
                     <div class="form-group">
-                        <label for="exampleInputToner">Model tonera</label>
-                        <input class="form-control" type="text" id="exampleInputToner" onkeyup="myFunction()" placeholder="Unesite model tonera"
+                        <label for="input_model_tonera">Model tonera</label>
+                        <input type="text" class="form-control" id="input_model_tonera" placeholder="Unesite model tonera"
                             title="Type in a name">
                         <ul id="myUL">
                             <li><a href="#">Toner model 1</a>
@@ -108,24 +94,6 @@
         </div>
 
     </div>
-    <script>
-        function myFunction() {
-            var input, filter, ul, li, a, i;
-            input = document.getElementById("exampleInputToner");
-            filter = input.value.toUpperCase();
-            ul = document.getElementById("myUL");
-            li = ul.getElementsByTagName("li");
-            for (i = 0; i < li.length; i++) {
-                a = li[i].getElementsByTagName("a")[0];
-                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                    li[i].style.display = "";
-                } else {
-                    li[i].style.display = "none";
-
-                }
-            }
-        }
-    </script>
 </body>
 
 </html>
