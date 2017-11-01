@@ -11,11 +11,6 @@
 
     <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	
-	<link rel="stylesheet" href="./bower_components/slick-carousel/slick/slick.css"/>
-	<link rel="stylesheet" href="./bower_components/slick-carousel/slick/slick-theme.css"/>
-
-	<script src="./bower_components/slick-carousel/slick/slick.min.js"></script>
-	
     <link rel="stylesheet" href="./styletoneri.css">
 
     <title>Lista magacina</title>
@@ -51,7 +46,7 @@
             <form action="./da-li-ste-sigurni.html" method="post">>
                 <div class="form-group">
                   <label for="input_magacin">Naziv magacina</label>
-                  <input type="text" class="form-control" id="input_magacin" onkeyup="myFunction()" placeholder="Unesite naziv magacina" title="Type in a name">
+                  <input type="text" class="form-control" id="input_magacin" placeholder="Unesite naziv magacina">
                   
                   <ul id="myUL">
                     <li><a href="#">Danijelova 32</a></li>
@@ -72,23 +67,5 @@
         </div>
         
     </div>
-    <script>
-        function myFunction() {
-            var input, filter, ul, li, a, i;
-            input = document.getElementById("exampleInputMagacin");
-            filter = input.value.toUpperCase();
-            ul = document.getElementById("myUL");
-            li = ul.getElementsByTagName("li");
-            for (i = 0; i < li.length; i++) {
-                a = li[i].getElementsByTagName("a")[0];
-                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                    li[i].style.display = "";
-                } else {
-                    li[i].style.display = "none";
-        
-                }
-            }
-        }
-    </script>
 </body>
 </html>
