@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<script src="./bower_components/jquery/dist/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css">
+
+    <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	
+	<link rel="stylesheet" href="./bower_components/slick-carousel/slick/slick.css"/>
+	<link rel="stylesheet" href="./bower_components/slick-carousel/slick/slick-theme.css"/>
+
+	<script src="./bower_components/slick-carousel/slick/slick.min.js"></script>
+	
+    <link rel="stylesheet" href="./styletoneri.css">
+
+    <title>Lista vlasnika</title>
+	
+</head>
+<body>
+    <div class="container">
+        <div class= "row">        
+            <nav class="col-lg-12 col-md-12 col-sm-12 col-xs-12 right backcolor">
+                <ul class="nav nav-tabs pull-left">
+                    <li><a class="active" href="./stampaci-lista.html">Štampači</a>
+                    <li><a href="./stampaci-model-lista.html">Model štampača</a>                            
+                    <li><a href="./toneri-lista.html">Toneri</a>
+                    <li><a href="./toneri-model-lista.html">Model tonera</a>                            
+                    <li><a href="./magacin-lista.html">Magacin</a>
+                    <li><a href="./korisnici-lista.html">Korisnici</a>
+                    <li><a href="./vlasnici-lista.html">Vlasnici</a>
+                    <li><a href="./zaduzenja-lista.html">Zaduženja</a>
+                    <li><a href="./trebovanja-lista.html">Trebovanja</a>
+                </ul>
+            </nav>
+        </div>
+        <div class= "row white">        
+            <div class="col-lg-10 col-md-8 col-sm-6 col-xs-6 left-side">
+                <h4>Dodaj vlasnika</h4>
+            </div>         
+            <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6 right-side text-right">
+                <a class="btn btn-success btn-md" href="./vlasnici-lista.html"> Lista </a>
+            </div> 
+        </div>
+        <div class= "row white">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <form>
+                    <div class="form-group">
+                      <label for="exampleInputName2">Ime i prezime</label>
+                      <input class="form-control" id="exampleInputName2" placeholder="Unesite ime i prezime">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleSelect1">Objekat</label>
+                        <select class="form-control" id="exampleSelect1">
+                            <option>Danijelova 11</option>
+                            <option>Kumodraška 22</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleSelect2">Broj kabineta</label>
+                        <select class="form-control" id="exampleSelect2">
+                            <option>111</option>
+                            <option>222</option>
+                            <option>333</option>
+                            <option>444</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleSelect3">Dodela štampača</label>
+                      <select class="form-control" id="exampleSelect3">
+                        <option>HP232</option>
+                        <option>HP333</option>
+                        <option>HP454</option>
+                      </select>
+                    </div>
+                    <a class="btn btn-primary btn-md" href="./da-li-ste-sigurni.html"> Sačuvaj </a>
+                  </form>  
+        </div>
+        </div>
+        
+    </div>
+</body>
+</html>

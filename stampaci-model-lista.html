@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<script src="./bower_components/jquery/dist/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css">
+
+    <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	
+	<link rel="stylesheet" href="./bower_components/slick-carousel/slick/slick.css"/>
+	<link rel="stylesheet" href="./bower_components/slick-carousel/slick/slick-theme.css"/>
+
+	<script src="./bower_components/slick-carousel/slick/slick.min.js"></script>
+	
+    <link rel="stylesheet" href="./styletoneri.css">
+
+    <title>Lista vlasnika</title>
+	
+</head>
+<body>
+    <div class="container">
+        <div class= "row">        
+            <nav class="col-lg-12 col-md-12 col-sm-12 col-xs-12 right backcolor">
+                <ul class="nav nav-tabs pull-left">
+                    <li><a class="active" href="./stampaci-lista.html">Štampači</a>
+                    <li><a href="./stampaci-model-lista.html">Model štampača</a>                            
+                    <li><a href="./toneri-lista.html">Toneri</a>
+                    <li><a href="./toneri-model-lista.html">Model tonera</a>
+                    <li><a href="./magacin-lista.html">Magacin</a>
+                    <li><a href="./korisnici-lista.html">Korisnici</a>
+                    <li><a href="./vlasnici-lista.html">Vlasnici</a>
+                    <li><a href="./zaduzenja-lista.html">Zaduženja</a>
+                    <li><a href="./trebovanja-lista.html">Trebovanja</a>
+                </ul>
+            </nav>
+        </div>
+        <div class= "row white">        
+            <div class="col-lg-10 col-md-8 col-sm-6 col-xs-6 left-side">
+                <h4>Lista modela štampača</h4>
+            </div>         
+            <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6 right-side text-right">
+                <a class="btn btn-success btn-md" href="./stampaci-model-dodaj.html"> + Dodaj </a>
+            </div> 
+        </div>
+        <div class= "row white">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <table class="table table-responsive table-striped table-bordered table-hover table-condensed">
+               <thead>                
+                   <tr>
+                    <th>Naziv modela</th>
+                    <th>Koloritet</th>
+                    <th>Broj podržavanja tonera</th>
+                    <th>Broj štampača u sistemu</th>
+                    <th>Opcija Izmeni</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>ŠM1</td>
+                    <td>U boji</td>
+                    <td>3</td>
+                    <td>5</td>
+                    <td><a href="./stampaci-model-dodaj.html">Izmeni</a></td>
+                </tr>
+                <tr>
+                    <td>ŠM2</td>
+                    <td>U boji</td>
+                    <td>2</td>
+                    <td>7</td>
+                    <td><a href="./stampaci-model-dodaj.html">Izmeni</a></td>
+                </tr>
+                <tr>
+                    <td>ŠM3</td>
+                    <td>U boji</td>
+                    <td>4</td>
+                    <td>8</td>
+                    <td><a href="./stampaci-model-dodaj.html">Izmeni</a></td>
+                </tr>
+            </tbody>
+            </table>             
+        </div>
+        </div>
+        
+    </div>
+</body>
+</html>

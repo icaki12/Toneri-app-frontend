@@ -1,0 +1,44 @@
+[
+	{
+		"toner_id" : 120,
+		"toner_model_name" : "CB400A",
+		"toner_model_type" : "black",
+		"toner_model_copy_price" : "6415.00",
+		"toner_model_original_price" : ""
+	},
+	{
+		"toner_id" : 121,
+		"toner_model_name" : "CB401A",
+		"toner_model_type" : "cyan",
+		"toner_model_copy_price" : "6415.00",
+		"toner_model_original_price" : ""
+	},
+	{
+		"toner_id" : 122,
+		"toner_model_name" : "CB402A",
+		"toner_model_type" : "yellow",
+		"toner_model_copy_price" : "6415.00",
+		"toner_model_original_price" : ""
+	},
+	{
+		"toner_id" : 123,
+		"toner_model_name" : "CB403A",
+		"toner_model_type" : "magenta",
+		"toner_model_copy_price" : "6415.00",
+		"toner_model_original_price" : ""
+	},
+	{
+		"toner_id" : 124,
+		"toner_model_name" : "CC530A",
+		"toner_model_type" : "black",
+		"toner_model_copy_price" : "3264.00",
+		"toner_model_original_price" : "14829.12"
+	},
+	{
+		"toner_id" : 54,
+		"toner_model_name" : "CLI-521C",
+		"toner_model_type" : "cyan",
+		"toner_model_copy_price" : "400.00",
+		"toner_model_original_price" : "1452.00"
+	}
+]

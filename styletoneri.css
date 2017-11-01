@@ -1,0 +1,26 @@
+.backcolor{
+    /*background-color: #f1f1f2;*/
+}
+.color: {
+    margin-top: 20px;
+    background-color: yellow;
+}
+body{
+    font-size: 14px;
+}
+.white{
+    margin-top: 20px;
+}
+.grey: {
+    margin-top: 20px;
+    background-color: rgb(197, 197, 197);
+}
+.print{
+    color: white !important;
+}
+.left-side{
+    border-bottom-color: 1px solid white;
+}
+.right-side:{
+    border-bottom-color: 1px solid rgb(255, 255, 255);
+}

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<script src="./bower_components/jquery/dist/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css">
+
+    <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	
+	<link rel="stylesheet" href="./bower_components/slick-carousel/slick/slick.css"/>
+	<link rel="stylesheet" href="./bower_components/slick-carousel/slick/slick-theme.css"/>
+
+	<script src="./bower_components/slick-carousel/slick/slick.min.js"></script>
+	
+    <link rel="stylesheet" href="./styletoneri.css">
+
+    <title>Lista štampača</title>
+	
+</head>
+<body>
+    <div class="container">
+        <div class= "row">        
+            <nav class="col-lg-12 col-md-12 col-sm-12 col-xs-12 right backcolor">
+                <ul class="nav nav-tabs pull-left">
+                    <li><a class="active" href="./stampaci-lista.html">Štampači</a>
+                    <li><a href="./stampaci-model-lista.html">Model štampača</a>                            
+                    <li><a href="./toneri-lista.html">Toneri</a>
+                    <li><a href="./toneri-model-lista.html">Model tonera</a>
+                    <li><a href="./magacin-lista.html">Magacin</a>
+                    <li><a href="./korisnici-lista.html">Korisnici</a>
+                    <li><a href="./vlasnici-lista.html">Vlasnici</a>
+                    <li><a href="./zaduzenja-lista.html">Zaduženja</a>
+                    <li><a href="./trebovanja-lista.html">Trebovanja</a>
+                </ul>
+            </nav>
+        </div>
+        <div class= "row white">        
+            <div class="col-lg-10 col-md-8 col-sm-6 col-xs-6 left-side">
+                <h4>Dodaj model tonera</h4>
+            </div>         
+            <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6 right-side text-right">
+                <a href="./toneri-model-lista.html" class="btn btn-success btn-md" > Lista </a>
+            </div> 
+        </div>
+        <div class= "row white">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <form>
+                <div class="form-group">
+                    <label for="exampleInputToner">Model tonera</label>
+                    <input class="form-control" type="text" id="exampleInputToner" onkeyup="myFunction()" placeholder="Unesite model tonera" title="Type in a name">
+                        <ul id="myUL">
+                            <li><a href="#">Toner model 1</a></li>
+                            <li><a href="#">Toner model 2</a></li>
+                            <li><a href="#">Toner model 3</a></li>
+                        </ul>
+                </div>
+                <div class="form-group">
+                  <label for="exampleSelect1">Tip tonera</label>
+                  <select class="form-control" id="exampleSelect1">
+                    <option>Megenta</option>
+                    <option>Cyan</option>
+                  </select>
+                </div>
+                <div class="form-check">
+                        <label class="form-check-label">
+                                Modeli štampača sa kojima radi:
+                        </label>
+                      </div>
+                <div class="form-check">
+                        <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input">
+                                ŠM1
+                            </label>
+                  </div>
+                  <div class="form-check">
+                        <label class="form-check-label">
+                             <input type="checkbox" class="form-check-input">
+                             ŠM2
+                         </label>
+                  </div>
+                  <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input">
+                            ŠM3
+                        </label>
+                  </div>
+                  <div class="form-check">
+                        <label class="form-check-label">
+                            Broj čekiranih polja: xx
+                        </label>
+                      </div>
+                  <a class="btn btn-primary btn-md" href="./da-li-ste-sigurni.html"> Sačuvaj </a>
+              </form>  
+        </div>
+        </div>
+        
+    </div>
+    <script>
+            function myFunction() {
+                var input, filter, ul, li, a, i;
+                input = document.getElementById("exampleInputToner");
+                filter = input.value.toUpperCase();
+                ul = document.getElementById("myUL");
+                li = ul.getElementsByTagName("li");
+                for (i = 0; i < li.length; i++) {
+                    a = li[i].getElementsByTagName("a")[0];
+                    if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        li[i].style.display = "";
+                    } else {
+                        li[i].style.display = "none";
+            
+                    }
+                }
+            }
+    </script>
+</body>
+</html>

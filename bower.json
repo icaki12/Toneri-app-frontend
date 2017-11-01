@@ -1,0 +1,17 @@
+{
+  "name": "prvi_projekat",
+  "authors": [
+    "icaki12 <ivana.belic.bg90@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
