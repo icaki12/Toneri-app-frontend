@@ -1,44 +1,45 @@
 <!DOCTYPE html>
 <html lang="sr">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 	<script src="./bower_components/jquery/dist/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css">
 
-    <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-	
-	<link rel="stylesheet" href="./bower_components/slick-carousel/slick/slick.css"/>
-	<link rel="stylesheet" href="./bower_components/slick-carousel/slick/slick-theme.css"/>
+	<script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+	<link rel="stylesheet" href="./bower_components/slick-carousel/slick/slick.css" />
+	<link rel="stylesheet" href="./bower_components/slick-carousel/slick/slick-theme.css" />
 
 	<script src="./bower_components/slick-carousel/slick/slick.min.js"></script>
-	
-    <link rel="stylesheet" href="./styletoneri.css">
 
-    <title>Novo trebovanje</title>
-    
-    <script>
-			var localTonerList = [];
-			var tonerNames = {};
-			var localCart = {};
+	<link rel="stylesheet" href="./styletoneri.css">
 
-			window.onload = init;
-			
-			function init() {
-				document.querySelector('.confirmation-row').style.display = 'none';
-				recreateCartListing();
-				getTonersFromApi();
-			}
+	<title>Novo trebovanje</title>
 
-			function getTonersFromApi() {
-				fetch('http://localhost/prvi_projekat/toneri-api/spisak-tonera.json')
-				.then(function(response){
+	<script>
+		var localTonerList = [];
+		var tonerNames = {};
+		var localCart = {};
+
+		window.onload = init;
+
+		function init() {
+			document.querySelector('.confirmation-row').style.display = 'none';
+			recreateCartListing();
+			getTonersFromApi();
+		}
+
+		function getTonersFromApi() {
+			fetch('http://localhost/prvi_projekat/toneri-api/spisak-tonera.json')
+				.then(function (response) {
 					return response.text();
 				})
-				.then(function(text){
+				.then(function (text) {
 					localTonerList = JSON.parse(text);
 
 					if (!localTonerList || !localTonerList.length) {
@@ -50,37 +51,70 @@
 						tonerNames[toner.toner_id] = toner.toner_model_name + ' (' + toner.toner_model_type + ')';
 					}
 				});
+		}
+
+		function doTonerSearch() {
+			var keyword = document.querySelector('#toner-search-input').value.trim().toLowerCase();
+
+			document.querySelector('#toner-table-body').innerHTML = '';
+
+			if (keyword.length < 3) {
+				return;
 			}
 
-			function doTonerSearch() {
-				var keyword = document.querySelector('#toner-search-input').value.trim().toLowerCase();
+			for (var i in localTonerList) {
+				var toner = localTonerList[i];
 
-				document.querySelector('#toner-table-body').innerHTML = '';
+				if (toner.toner_model_name.toLowerCase().indexOf(keyword) >= 0 ||
+					toner.toner_model_type.toLowerCase().indexOf(keyword) >= 0) {
 
-				if (keyword.length < 3) {
-					return;
+					addTonerToBody(toner);
 				}
+			}
+		}
 
-				for (var i in localTonerList) {
-					var toner = localTonerList[i];
+		function addTonerToBody(toner) {
+			var red = document.querySelector('#toner-templates').content.querySelector('tr.toner-item').cloneNode(true);
+			red.querySelector('td.toner-item-model-name').innerText = toner.toner_model_name;
+			red.querySelector('td.toner-item-model-type').innerText = toner.toner_model_type;
+			red.dataset.tonerId = toner.toner_id;
 
-					if (toner.toner_model_name.toLowerCase().indexOf(keyword) >= 0 ||
-					    toner.toner_model_type.toLowerCase().indexOf(keyword) >= 0) {
+			document.querySelector('#toner-table-body').appendChild(red);
+		}
+		document.querySelector('#cart-table-body').innerHTML = '';
 
-						addTonerToBody(toner);
-					}
-				}
+		document.querySelector('#make-confirmation-page-button').style.display = 'none';
+
+		if (Object.keys(localCart).length == 0) {
+			return;
+		}
+
+		document.querySelector('#make-confirmation-page-button').style.display = 'inline-block';
+
+		for (tonerId in localCart) {
+			quantity = localCart[tonerId];
+
+			var red = document.querySelector('#cart-templates').content.querySelector('tr.cart-item').cloneNode(true);
+			red.querySelector('td.item-model-name').innerText = tonerNames[tonerId];
+			red.querySelector('td.item-quantity').innerText = quantity;
+			red.dataset.tonerId = tonerId;
+
+			document.querySelector('#cart-table-body').appendChild(red);
+		}
 			}
 
-			function addTonerToBody(toner) {
-				var red = document.querySelector('#toner-templates').content.querySelector('tr.toner-item').cloneNode(true);
-				red.querySelector('td.toner-item-model-name').innerText = toner.toner_model_name;
-				red.querySelector('td.toner-item-model-type').innerText = toner.toner_model_type;
-				red.dataset.tonerId = toner.toner_id;
+		function removeFromCart(senderButton) {
+			var red = senderButton.parentElement.parentElement;
+			var tonerId = red.dataset.tonerId;
+			delete localCart[tonerId];
+			recreateCartListing();
+		}
 
-				document.querySelector('#toner-table-body').appendChild(red);
+		function makeConfirmationPage() {
+			var listaDugmicaUKorpi = document.querySelectorAll('.cart-item button');
+			for (var i in listaDugmicaUKorpi) {
+				listaDugmicaUKorpi[i].disabled = true;
 			}
-
 			function addToCart(senderButton) {
 				var red = senderButton.parentElement.parentElement;
 
@@ -97,43 +131,10 @@
 			}
 
 			function recreateCartListing() {
-				document.querySelector('#cart-table-body').innerHTML = '';
 
-				document.querySelector('#make-confirmation-page-button').style.display = 'none';
-
-				if (Object.keys(localCart).length == 0) {
-					return;
-				}
-
-				document.querySelector('#make-confirmation-page-button').style.display = 'inline-block';
-
-				for (tonerId in localCart) {
-					quantity = localCart[tonerId];
-
-					var red = document.querySelector('#cart-templates').content.querySelector('tr.cart-item').cloneNode(true);
-					red.querySelector('td.item-model-name').innerText = tonerNames[tonerId];
-					red.querySelector('td.item-quantity').innerText = quantity;
-					red.dataset.tonerId = tonerId;
-
-					document.querySelector('#cart-table-body').appendChild(red);
-				}
-			}
-
-			function removeFromCart(senderButton) {
-				var red = senderButton.parentElement.parentElement;
-				var tonerId = red.dataset.tonerId;
-				delete localCart[tonerId];
-				recreateCartListing();
-			}
-
-			function makeConfirmationPage() {
-				var listaDugmicaUKorpi = document.querySelectorAll('.cart-item button');
-				for (var i in listaDugmicaUKorpi) {
-					listaDugmicaUKorpi[i].disabled = true;
-				}
 
 				document.querySelector('#make-confirmation-page-button').disabled = true;
-				
+
 				document.querySelector('#blok-pretrage').style.display = 'none';
 				document.querySelector('#blok-tonera').style.display = 'none';
 
@@ -147,7 +148,7 @@
 				}
 
 				document.querySelector('#make-confirmation-page-button').disabled = false;
-				
+
 				document.querySelector('#blok-pretrage').style.display = 'block';
 				document.querySelector('#blok-tonera').style.display = 'block';
 
@@ -158,105 +159,109 @@
 				document.querySelector('#hidden-cart-data').value = JSON.stringify(localCart);
 				document.querySelector('#send-cart-form').submit();
 			}
-		</script>
-	</head>
-	<body>
-        <div class="container color">
-            <div class= "row">        
-                <div class="col-lg-10 col-md-8 col-sm-6 col-xs-6 left-side">
-                    <h4>Novo trebovanje</h4>
-                </div>         
-            </div>
-            <div class="row cart-block">
-                <div class="col-lg-10 col-md-8 col-sm-6 col-xs-6 grey">
-                    <div class="well well-lg">
-                        <form action="receive.php" method="post" id="send-cart-form">
-                            <input type="hidden" name="cart" value="" id="hidden-cart-data">
-                        </form>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Model</th>
-                                        <th>Količina</th>
-                                        <th>Opcije</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="cart-table-body"></tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td colspan="2">&nbsp;</td>
-                                        <td>
-                                            <button id="make-confirmation-page-button" type="button"  class="btn btn-md btn-success" onclick="makeConfirmationPage();">
-                                                Naruči
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr class="confirmation-row">
-                                        <td>
-                                            <button type="button"  class="btn btn-md btn-danger" onclick="cancelOrder();">
-                                                Otkaži
-                                            </button>
-                                        </td>
-                                        <td>&nbsp;</td>
-                                        <td>
-                                            <button type="button"  class="btn btn-md btn-primary" onclick="sendOrder();">
-                                                Pošalji
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tfoot>
-                            </table>
+	</script>
+</head>
 
-                <template id="cart-templates">
-                    <tr class="cart-item" data-toner-id="">
-                        <td class="item-model-name"></td>
-                        <td class="item-quantity"></td>
-                        <td>
-                            <button type="button"  class="btn btn-xs btn-danger glyphicon glyphicon-minus" onclick="removeFromCart(this);"></button>
-                        </td>
-                    </tr>
-                </template>
-            </div>
-                </div>
-            </div>
-            <div class="row" id="blok-pretrage">
-                <div class="col-lg-10 col-md-8 col-sm-6 col-xs-6 grey">
-                    <div class="well well-lg">
-                        <div class="toner-search">
-                            <label for="exampleInputStampac">Pretraga tonera:</label> 
-                            <input class="form-control" type="text" id="toner-search-input" value="" onkeyup="doTonerSearch();"><br>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row cart-block" id="blok-tonera">
-                <div class="col-lg-10 col-md-8 col-sm-6 col-xs-6 grey">
-                    <div class="well well-lg">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Model</th>
-                                    <th>Tip</th>
-                                    <th>Količina</th>
-                                    <th>Opcije</th>
-                                </tr>
-                            </thead>
-                            <tbody id="toner-table-body"></tbody>
-                        </table>
-                    </div>
-                        <template id="toner-templates">
-                            <tr class="toner-item" data-toner-id="">
-                                <td class="toner-item-model-name"></td>
-                                <td class="toner-item-model-type"></td>
-                                <td>
-                                    <input type="number" min="1" max="30" step="1" class="toner-item-input-quantity" value="1">
-                                </td>
-                                <td>
-                                    <button type="button"  class="btn btn-xs btn-success glyphicon glyphicon-plus" onclick="addToCart(this);"></button>
-                                </td>
-                            </tr>
-                        </template>
-            </div>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-10 col-md-8 col-sm-6 col-xs-6 left-side">
+				<h4>Novo trebovanje</h4>
+			</div>
 		</div>
-	</body>
+		<div class="row cart-block">
+			<div class="col-lg-10 col-md-8 col-sm-6 col-xs-6 grey">
+				<div class="well well-lg">
+					<form action="receive.php" method="post" id="send-cart-form">
+						<input type="hidden" name="cart" value="" id="hidden-cart-data">
+					</form>
+					<table>
+						<thead>
+							<tr>
+								<th>Model</th>
+								<th>Količina</th>
+								<th>Opcije</th>
+							</tr>
+						</thead>
+						<tbody id="cart-table-body"></tbody>
+						<tfoot>
+							<tr>
+								<td colspan="2">&nbsp;</td>
+								<td>
+									<button id="make-confirmation-page-button" type="button" class="btn btn-md btn-success" onclick="makeConfirmationPage();">
+										Naruči
+									</button>
+								</td>
+							</tr>
+							<tr class="confirmation-row">
+								<td>
+									<button type="button" class="btn btn-md btn-danger" onclick="cancelOrder();">
+										Otkaži
+									</button>
+								</td>
+								<td>&nbsp;</td>
+								<td>
+									<button type="button" class="btn btn-md btn-primary" onclick="sendOrder();">
+										Pošalji
+									</button>
+								</td>
+							</tr>
+						</tfoot>
+					</table>
+
+					<template id="cart-templates">
+						<tr class="cart-item" data-toner-id="">
+							<td class="item-model-name"></td>
+							<td class="item-quantity"></td>
+							<td>
+								<button type="button" class="btn btn-xs btn-danger glyphicon glyphicon-minus" onclick="removeFromCart(this);"></button>
+							</td>
+						</tr>
+					</template>
+				</div>
+			</div>
+		</div>
+		<div class="row" id="blok-pretrage">
+			<div class="col-lg-10 col-md-8 col-sm-6 col-xs-6 grey">
+				<div class="well well-lg">
+					<div class="toner-search">
+						<label for="toner-search-input">Pretraga tonera:</label>
+						<input type="text" class="form-control" id="toner-search-input" value="" onkeyup="doTonerSearch();">
+						<br>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row cart-block" id="blok-tonera">
+			<div class="col-lg-10 col-md-8 col-sm-6 col-xs-6 grey">
+				<div class="well well-lg">
+					<table>
+						<thead>
+							<tr>
+								<th>Model</th>
+								<th>Tip</th>
+								<th>Količina</th>
+								<th>Opcije</th>
+							</tr>
+						</thead>
+						<tbody id="toner-table-body"></tbody>
+					</table>
+				</div>
+				<template id="toner-templates">
+					<tr class="toner-item" data-toner-id="">
+						<td class="toner-item-model-name"></td>
+						<td class="toner-item-model-type"></td>
+						<td>
+							<input type="number" min="1" max="30" step="1" class="toner-item-input-quantity" value="1">
+						</td>
+						<td>
+							<button type="button" class="btn btn-xs btn-success glyphicon glyphicon-plus" onclick="addToCart(this);"></button>
+						</td>
+					</tr>
+				</template>
+			</div>
+		</div>
+	</div>
+</body>
+
 </html>
